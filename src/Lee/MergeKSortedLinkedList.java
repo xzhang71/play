@@ -1,4 +1,6 @@
-package Lee;
+package lee;
+
+import lee.domain.ListNode;
 
 import java.util.Comparator;
 import java.util.List;
@@ -46,12 +48,3 @@ public class MergeKSortedLinkedList {
     }
 }
 
-class ListNode {
-    int val;
-    ListNode next;
-
-    ListNode(int x) {
-        val = x;
-        next = null;
-    }
-}

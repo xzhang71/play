@@ -1,4 +1,4 @@
-package Lee;
+package lee;
 
 import java.util.*;
 

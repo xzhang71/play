@@ -1,4 +1,4 @@
-package Lee;
+package lee;
 
 /**
  * Created by xzhang71 on 6/8/14.
