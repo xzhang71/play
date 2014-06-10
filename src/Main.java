@@ -1,6 +1,7 @@
 import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Stack;
 
 /**
  * Created by xzhang71 on 6/3/14.
@@ -15,5 +16,6 @@ public class Main {
             }
         };
         Queue<Integer> pq = new PriorityQueue<Integer>(10, comp);
+        Stack<Integer> stack = new Stack<Integer>();
     }
 }
