@@ -1,7 +1,4 @@
-import java.util.Comparator;
-import java.util.PriorityQueue;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * Created by xzhang71 on 6/3/14.
@@ -17,5 +14,7 @@ public class Main {
         };
         Queue<Integer> pq = new PriorityQueue<Integer>(10, comp);
         Stack<Integer> stack = new Stack<Integer>();
+        List<Integer> list = new ArrayList<>();
+        int[] nums = {0, 1, 2, 3, 4, 5, 6, 7};
     }
 }
