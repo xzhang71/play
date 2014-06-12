@@ -5,15 +5,16 @@ import java.util.*;
  */
 public class Main {
     public static void main(String[] args) {
-        StringBuilder sb = new StringBuilder();
+        StringBuffer sb = new StringBuffer();
         Comparator<Integer> comp = new Comparator<Integer>() {
             @Override
             public int compare(Integer o1, Integer o2) {
                 return 0;
             }
         };
-        Queue<Integer> pq = new PriorityQueue<>(10, comp);
-        Stack<Integer> stack = new Stack<>();
-        Set<Integer> set = new HashSet<>();
+        Queue<Integer> pq = new PriorityQueue<Integer>(10, comp);
+        Stack<Integer> stack = new Stack<Integer>();
+        List<Integer> list = new ArrayList<>();
+        int[] nums = {0, 1, 2, 3, 4, 5, 6, 7};
     }
 }
