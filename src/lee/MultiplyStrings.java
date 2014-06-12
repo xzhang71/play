@@ -37,7 +37,9 @@ public class MultiplyStrings {
 
         String output = String.valueOf(reverse(result));
         int k = 0;
-        while (k < output.length() && output.charAt(k) == '0') {
+        // "0" * "0" = "0" rather than ""
+        // to keep the last "0", the right bound of k is length - 1
+        while (k < output.length() - 1 && output.charAt(k) == '0') {
             k++;
         }
 
