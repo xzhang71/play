@@ -1,4 +1,4 @@
-package lee;
+package leetcode;
 
 /**
  * Created by xzhang on 6/16/14.
