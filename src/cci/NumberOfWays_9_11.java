@@ -30,6 +30,7 @@ public class NumberOfWays_9_11 {
         int total = 0;
 
         for (int i = left + 1; i <= right - 1; i += 2) {
+            // TODO: may not need to calc all
             int left0 = numberOfWays(exp, left, i - 1, 0, cache);
             int left1 = numberOfWays(exp, left, i - 1, 1, cache);
             int right0 = numberOfWays(exp, i + 1, right, 0, cache);
