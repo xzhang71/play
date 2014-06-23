@@ -37,13 +37,12 @@ public class QuickSort2 extends Sort {
                 rp--;
             }
 
-            if (lp < rp) {
-                int temp = input[lp];
-                input[lp] = input[rp];
-                input[rp] = temp;
-            }
-
             if (lp <= rp) {
+                if (lp < rp) {
+                    int temp = input[lp];
+                    input[lp] = input[rp];
+                    input[rp] = temp;
+                }
                 lp++;
                 rp--;
             }
