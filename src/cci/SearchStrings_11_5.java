@@ -3,10 +3,10 @@ package cci;
 /**
  * Created by xzhang71 on 6/23/14.
  */
-public class SearchString_11_5 {
+public class SearchStrings_11_5 {
 
     public static void main(String[] args) {
-        SearchString_11_5 ss = new SearchString_11_5();
+        SearchStrings_11_5 ss = new SearchStrings_11_5();
 
         String[] input = {"", "", "aaa", "", "", "bbb", "", "", "ccc", "", "", "ddd", "", ""};
         String target = "bbb";
