@@ -1,60 +1,55 @@
 package sort;
 
-import java.util.Random;
+/**
+ * Created by xzhang on 6/23/14.
+ */
+public class QuickSort extends Sort {
 
-public class QuickSort {
     public static void main(String[] args) {
-        // int[] arr = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-        for (int k = 0; k < 20; k++) {
-            Random rand = new Random(k);
-            int[] arr = new int[k];
-            for (int i = 0; i < arr.length; i++) {
-                arr[i] = rand.nextInt();
-            }
-            quickSort(arr);
-            boolean result = true;
-            for (int i = 1; i < arr.length; i++) {
-                result = result && arr[i] > arr[i - 1];
-            }
-            System.out.println(result);
+        int[] input = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+        QuickSort sort = new QuickSort();
+        sort.sort(input);
+        for (int i = 0; i < input.length; i++) {
+            System.out.print(input[i] + " ");
         }
     }
 
-    public static void quickSort(int[] arr) {
-        quickSortGo(arr, 0, arr.length - 1);
+    public void sort(int[] input) {
+        sortGo(input, 0, input.length - 1);
     }
 
-    private static void quickSortGo(int[] arr, int left, int right) {
+    public void sortGo(int[] input, int left, int right) {
         if (left >= right) {
             return;
         }
 
-        int pivot = arr[(left + right) / 2];
-        int i = left;
-        int j = right;
-        while (i < j) {
-            // without arr[k] == pivot
-            // think of {5, 3}
-            while (arr[i] < pivot) {
-                i++;
+        int mid = (left + right) / 2;
+        int pivot = input[mid];
+        int lp = left;
+        int rp = right;
+
+        while (lp < rp) {
+            while (input[lp] < pivot) {
+                lp++;
             }
 
-            while (arr[j] > pivot) {
-                j--;
+            while (input[rp] > pivot) {
+                rp--;
             }
 
-            if (i <= j) {
-                if (i < j) {
-                    int temp = arr[i];
-                    arr[i] = arr[j];
-                    arr[j] = temp;
+            if (lp <= rp) {
+                if (lp < rp) {
+                    int temp = input[lp];
+                    input[lp] = input[rp];
+                    input[rp] = temp;
                 }
-                i++;
-                j--;
+                lp++;
+                rp--;
             }
         }
 
-        quickSortGo(arr, left, j);
-        quickSortGo(arr, i, right);
+        sortGo(input, left, rp);
+        sortGo(input, lp, right);
     }
+
 }

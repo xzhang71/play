@@ -3,7 +3,7 @@ package leetcode;
 /**
  * Created by xzhang71 on 6/9/14.
  */
-public class SingNumber {
+public class SinglgNumber {
     public static int singleNumber(int[] arr) {
         if (arr == null || arr.length == 0) {
             return -1;
