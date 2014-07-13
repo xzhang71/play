@@ -5,7 +5,7 @@ import java.util.HashMap;
 /**
  * Created by xzhang on 7/10/14.
  */
-public class RansomNoteFromMagazine {
+public class StringRansomFromMagazine {
     /**
      * A ransom note can be formed by cutting words out of a magazine to form a new sentence. How would you figure out if a ransom note (represented as a string) can be formed from a given magazine (string)?
      */
@@ -43,6 +43,6 @@ public class RansomNoteFromMagazine {
     }
 
     public static void main(String[] args) {
-        System.out.println(RansomNoteFromMagazine.ransom("This main article about dog and dog lovers is very interesting though.", "You are dead man."));
+        System.out.println(StringRansomFromMagazine.ransom("This main article about dog and dog lovers is very interesting though.", "You are dead man."));
     }
 }

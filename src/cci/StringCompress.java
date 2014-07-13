@@ -10,12 +10,13 @@ public class StringCompress {
         int i = 0;
         while (i < content.length()) {
             char ch = content.charAt(i);
-            int j = i + 1;
-            while (j < content.length() && content.charAt(j) == ch) {
-                j++;
+            int l = 1;
+            i++;
+            while (i < content.length() && content.charAt(i) == ch) {
+                l++;
+                i++;
             }
-            sb.append("" + ch + (j - i));
-            i = j;
+            sb.append("" + ch + l);
         }
 
         return sb.length() < content.length() ? sb.toString() : content;

@@ -3,7 +3,7 @@ package cci;
 /**
  * Created by xzhang on 7/10/14.
  */
-public class JoinWords {
+public class StringJoin {
 
     /**
      * Join words without any other data structure

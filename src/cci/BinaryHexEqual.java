@@ -3,7 +3,7 @@ package cci;
 /**
  * Created by xzhang on 7/10/14.
  */
-public class EqualOfBinaryAndHex {
+public class BinaryHexEqual {
 
     /**
      * Check if the value of a binary number as a string equals the hexadecimal number as a string
@@ -68,7 +68,7 @@ public class EqualOfBinaryAndHex {
     }
 
     public static void main(String[] args) {
-        System.out.println(EqualOfBinaryAndHex.equal("101011111001010101010101110", "57CAAAE"));
-        System.out.println(EqualOfBinaryAndHex.equal("101011111001010101010101111", "57CAAAE"));
+        System.out.println(BinaryHexEqual.equal("101011111001010101010101110", "57CAAAE"));
+        System.out.println(BinaryHexEqual.equal("101011111001010101010101111", "57CAAAE"));
     }
 }

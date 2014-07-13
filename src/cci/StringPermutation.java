@@ -1,6 +1,7 @@
 package cci;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -12,42 +13,76 @@ public class StringPermutation {
      * Design an algorithm to print all permutations of a string with duplicate characters.
      */
 
-    public static List<String> permutation(String str) {
+    public static List<String> permute(String str) {
         List<String> result = new ArrayList<>();
         if (str == null || str.length() == 0) {
             return result;
         }
 
-        return permutationGo(str, 0);
-    }
+        result.add("");
+        List<String> temp = new ArrayList<>();
 
-    private static List<String> permutationGo(String str, int index) {
-        List<String> result = new ArrayList<>();
-        // attention >=
-        if (index >= str.length()) {
-            result.add("");
-            return result;
-        }
-
-        char c = str.charAt(index);
-        List<String> subresult = permutationGo(str, index + 1);
-        for (String s : subresult) {
-            for (int i = 0; i <= s.length(); i++) {
-                String ns = s.substring(0, i) + c + s.substring(i, s.length());
-                result.add(ns);
-                while (i < s.length() && s.charAt(i) == c) {
-                    i++;
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            for (String s : result) {
+                for (int j = s.lastIndexOf(c) + 1; j <= i; j++) {
+                    temp.add(s.substring(0, j) + c + s.substring(j, i));
                 }
             }
+            List<String> swap = result;
+            result = temp;
+            temp = swap;
+            temp.clear();
         }
 
         return result;
     }
 
+    /**
+     * Check if a string is a permutation of another one
+     * Time Complexity O(n)
+     * Space Complexity O(n)
+     */
+    public static boolean isPermutation(String str1, String str2) {
+        if (str1 == null || str2 == null) {
+            return false;
+        }
+
+        if (str1.length() != str2.length()) {
+            return false;
+        }
+
+        HashMap<Character, Integer> cache = new HashMap<>();
+        for (char c : str1.toCharArray()) {
+            Integer count = cache.get(c);
+            if (count == null) {
+                cache.put(c, 1);
+            } else {
+                cache.put(c, count + 1);
+            }
+        }
+
+        for (char c : str2.toCharArray()) {
+            Integer count = cache.get(c);
+            if (count == null || count <= 0) {
+                return false;
+            }
+
+            cache.put(c, count - 1);
+        }
+
+        return true;
+    }
+
+
     public static void main(String[] args) {
-        List<String> result = StringPermutation.permutation("abb");
+        List<String> result = StringPermutation.permute("cbabcc");
+        System.out.println(result.size());
         for (String s : result) {
             System.out.println(s);
         }
+
+        System.out.println();
+        System.out.println(StringPermutation.isPermutation("abbcccddddeeeee", "eeeeeddddcccbba"));
     }
 }

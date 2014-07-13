@@ -11,12 +11,12 @@ package cci;
 import java.util.Collections;
 import java.util.PriorityQueue;
 
-public class MedianOfNumbers {
+public class MedianTrack {
 
     private PriorityQueue<Integer> top;
     private PriorityQueue<Integer> tail;
 
-    public MedianOfNumbers() {
+    public MedianTrack() {
         top = new PriorityQueue<>();
         tail = new PriorityQueue<>(11, Collections.reverseOrder());
     }
@@ -40,7 +40,7 @@ public class MedianOfNumbers {
     }
 
     public static void main(String[] args) {
-        MedianOfNumbers obj = new MedianOfNumbers();
+        MedianTrack obj = new MedianTrack();
         obj.insert(3);
         System.out.println(obj.getMedian());
 
