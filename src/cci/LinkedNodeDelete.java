@@ -11,15 +11,14 @@ public class LinkedNodeDelete {
             return;
         }
 
-        LinkedNode prev = null;
         while (node.next != null) {
             node.val = node.next.val;
-            prev = node;
+            // IMPORTANT
+            if(node.next.next == null) {
+                node.next = null;
+                break;
+            }
             node = node.next;
-        }
-
-        if (prev != null) {
-            prev.next = null;
         }
     }
 

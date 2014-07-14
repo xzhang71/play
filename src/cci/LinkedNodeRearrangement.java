@@ -5,7 +5,7 @@ import cci.domain.LinkedNode;
 /**
  * Created by xzhang71 on 7/13/14.
  */
-public class LinkedListRearrangement {
+public class LinkedNodeRearrangement {
     public static LinkedNode rearrange(LinkedNode head) {
         if (head == null || head.next == null) {
             return head;
@@ -16,8 +16,8 @@ public class LinkedListRearrangement {
     }
 
     private static LinkedNode[] partition(LinkedNode head) {
-        LinkedNode slow = head, fast = head;
-        while (fast.next != null && fast.next.next != null) {
+        LinkedNode slow = head, fast = head.next;
+        while (fast != null && fast.next != null) {
             slow = slow.next;
             fast = fast.next.next;
         }
@@ -42,7 +42,7 @@ public class LinkedListRearrangement {
 
     public static void main(String[] args) {
         LinkedNode head = new LinkedNode(0, new LinkedNode(1, new LinkedNode(2, new LinkedNode(3, new LinkedNode(4, new LinkedNode(5, new LinkedNode(6, new LinkedNode(7, null))))))));
-        head = LinkedListRearrangement.rearrange(head);
+        head = LinkedNodeRearrangement.rearrange(head);
         while (head != null) {
             System.out.print(head.val + " ");
             head = head.next;
@@ -51,7 +51,7 @@ public class LinkedListRearrangement {
         System.out.println();
 
         LinkedNode head2 = new LinkedNode(0, new LinkedNode(1, new LinkedNode(2, new LinkedNode(3, new LinkedNode(4, new LinkedNode(5, new LinkedNode(6, null)))))));
-        head2 = LinkedListRearrangement.rearrange(head2);
+        head2 = LinkedNodeRearrangement.rearrange(head2);
         while (head2 != null) {
             System.out.print(head2.val + " ");
             head2 = head2.next;
