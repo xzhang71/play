@@ -1,11 +1,11 @@
-package cci.temp;
+package cci;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Created by xzhang71 on 7/13/14.
  */
-public class RotatedStringCheck {
+public class StringRotationCheck {
 
     public static boolean isRotated(String str1, String str2) {
         if (str1.length() != str2.length()) {
