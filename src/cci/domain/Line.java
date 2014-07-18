@@ -11,6 +11,9 @@ public class Line {
     public double intercept;
 
     public Line(Point p1, Point p2) {
+        if (p1.x == p2.x && p1.y == p2.y) {
+            throw new RuntimeException("same point");
+        }
         if (p1.x == p2.x) {
             infiniteSlope = true;
             intercept = p1.x;

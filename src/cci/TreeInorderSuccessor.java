@@ -32,11 +32,7 @@ public class TreeInorderSuccessor {
             while (current.parent != null && current == current.parent.right) {
                 current = current.parent;
             }
-            if (current.parent == null) {
-                return null;
-            } else {
-                return current.parent;
-            }
+            return current.parent;
         }
 
         return null;
@@ -64,6 +60,7 @@ public class TreeInorderSuccessor {
         node3.right = node7;
         node7.parent = node3;
 
+        // 3 5 7 6 4 1 null
         System.out.println(TreeInorderSuccessor.inorderSuccessor(node1).val);
         System.out.println(TreeInorderSuccessor.inorderSuccessor(node2).val);
         System.out.println(TreeInorderSuccessor.inorderSuccessor(node3).val);
