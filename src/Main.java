@@ -7,4 +7,17 @@ import java.util.List;
  */
 public class Main {
 
+
+    public static void main(String[] args) {
+        List outer = new ArrayList();
+
+        if (true) {
+            List inner = new ArrayList();
+            inner.add(new Object());
+
+            outer = inner;
+        }
+
+        System.out.println(outer.size());
+    }
 }
