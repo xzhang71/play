@@ -1,4 +1,4 @@
-package sort;
+package sortAndSearch;
 
 /**
  * Created by xzhang on 6/23/14.
