@@ -6,22 +6,23 @@ package cci;
 public class BitNext {
 
     public static int nextSmallest(int n) {
-        if (n == Integer.MAX_VALUE) {
-            throw new RuntimeException("next smallest does not exist");
-        }
-
         int zeros = 0;
         int ones = 0;
         int mask = 1;
 
-        while ((mask & n) == 0) {
+        while ((zeros + ones <= 30) && (mask & n) == 0) {
             mask = mask << 1;
             zeros++;
         }
 
-        while ((mask & n) != 0) {
+        while ((zeros + ones <= 30) && (mask & n) != 0) {
             mask = mask << 1;
             ones++;
+        }
+
+        if (zeros + ones >= 31) {
+            System.out.print("invalid input.");
+            return n;
         }
 
         n = n | mask;
@@ -45,39 +46,39 @@ public class BitNext {
     }
 
     public static int nextLargest(int n) {
-        if (n == 0) {
-            throw new RuntimeException("next largest does not exist");
-        }
-
         int zeros = 0;
         int ones = 0;
         int mask = 1;
 
-        while ((n & mask) != 0) {
+        while ((zeros + ones) <= 30 && (n & mask) != 0) {
             ones++;
-            mask <<= 1;
+            mask = mask << 1;
         }
 
-        while ((n & mask) == 0) {
+        while ((zeros + ones) <= 30 && (n & mask) == 0) {
             zeros++;
-            mask <<= 1;
+            mask = mask << 1;
+        }
+
+        if (zeros + ones >= 31) {
+            System.out.print("invalid input.");
+            return n;
         }
 
         n = n & (~mask);
         zeros--;
-        ones++;
-        mask >>= 1;
+        mask = mask >> 1;
 
         while (ones > 0) {
             n = n | mask;
             ones--;
-            mask >>= 1;
+            mask = mask >> 1;
         }
 
         while (zeros > 0) {
             n = n & (~mask);
             zeros--;
-            mask >>= 1;
+            mask = mask >> 1;
         }
 
         return n;
@@ -89,9 +90,17 @@ public class BitNext {
         // 110011010001 = 52433
         System.out.println(BitNext.nextSmallest(n));
 
+        System.out.println(BitNext.nextSmallest(0));
+
+        System.out.println(BitNext.nextSmallest(Integer.MAX_VALUE));
+
         // 1100110011
         n = 819;
         // 1100101110 = 814
         System.out.println(BitNext.nextLargest(n));
+
+        System.out.println(BitNext.nextLargest(0));
+
+        System.out.println(BitNext.nextLargest(Integer.MAX_VALUE));
     }
 }

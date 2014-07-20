@@ -11,12 +11,11 @@ public class BitDoubleToBinary {
      *
      * @param num
      */
-    public static void doubleToBinary(double num) {
-        StringBuilder cache = new StringBuilder('.');
+    public static String doubleToBinary(double num) {
+        StringBuilder cache = new StringBuilder(".");
         while (num != 0) {
             if (cache.length() >= 32) {
-                System.out.println("ERROR");
-                return;
+                return "ERROR";
             }
 
             num = num * 2;
@@ -27,11 +26,11 @@ public class BitDoubleToBinary {
                 cache.append(0);
             }
         }
-        System.out.println(cache);
+        return cache.toString();
     }
 
     public static void main(String[] args) {
         double num = 0.25;
-        BitDoubleToBinary.doubleToBinary(num);
+        System.out.println(BitDoubleToBinary.doubleToBinary(num));
     }
 }
