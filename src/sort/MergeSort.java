@@ -3,13 +3,11 @@ package sort;
 /**
  * Created by xzhang on 6/23/14.
  */
-public class MergeSort extends Sort {
+public class MergeSort {
 
     public static void main(String[] args) {
-        MergeSort sort = new MergeSort();
-
         int[] input1 = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
-        sort.sortR(input1);
+        MergeSort.recursivelySort(input1);
         for (int i = 0; i < input1.length; i++) {
             System.out.print(input1[i] + " ");
         }
@@ -17,35 +15,30 @@ public class MergeSort extends Sort {
         System.out.println();
 
         int[] input2 = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
-        sort.sortR(input2);
+        MergeSort.iterativelySort(input2);
         for (int i = 0; i < input2.length; i++) {
             System.out.print(input2[i] + " ");
         }
     }
 
-    public void sort(int[] input) {
-
+    public static void recursivelySort(int[] input) {
+        recursivelySort(input, new int[input.length], 0, input.length - 1);
     }
 
-    public void sortR(int[] input) {
-        int[] cache = new int[input.length];
-        sortRGo(input, cache, 0, input.length - 1);
-    }
-
-    private void sortRGo(int[] input, int[] cache, int left, int right) {
-        if (left >= right) {
+    private static void recursivelySort(int[] input, int[] cache, int left, int right) {
+        if (left == right) {
             return;
         }
 
-        int mid = (left + right) / 2;
-
-        sortRGo(input, cache, left, mid);
-        sortRGo(input, cache, mid + 1, right);
+        int lmid = (left + right) / 2;
+        int rmid = lmid + 1;
+        recursivelySort(input, cache, left, lmid);
+        recursivelySort(input, cache, rmid, right);
 
         int i = left;
-        int j = mid + 1;
+        int j = rmid;
         int k = left;
-        while (i <= mid && j <= right) {
+        while (i <= lmid && j <= right) {
             if (input[i] <= input[j]) {
                 cache[k] = input[i];
                 i++;
@@ -57,52 +50,54 @@ public class MergeSort extends Sort {
             }
         }
 
-        while (i <= mid) {
+        while (i <= lmid) {
             cache[k] = input[i];
             i++;
             k++;
         }
 
-        k = left;
-        while (k <= right) {
+        k--;
+        while (k >= left) {
             input[k] = cache[k];
-            k++;
+            k--;
         }
     }
 
-    public void sortNonR(int[] input) {
+    public static void iterativelySort(int[] input) {
         int[] cache = new int[input.length];
-        for (int i = 1; i < input.length; i *= 2) {
-            for (int left = 0; left < input.length - i; left += i * 2) {
-                int right = left + i * 2 - 1;
-                int mid = (left + right) / 2;
-                int lp = left;
-                int rp = mid + 1;
-                int p = left;
-                while (lp <= mid && rp <= right) {
-                    if (input[lp] <= input[rp]) {
-                        cache[p] = input[lp];
-                        lp++;
-                        p++;
+        for (int size = 1; size < input.length; size *= 2) {
+            for (int left = 0; left + size < input.length; left += size * 2) {
+                int lmid = left + size - 1;
+                int rmid = lmid + 1;
+                int right = Math.min(left + 2 * size - 1, input.length - 1);
+
+                int i = left;
+                int j = rmid;
+                int k = left;
+                while (i <= lmid && j <= right) {
+                    if (input[i] <= input[j]) {
+                        cache[k] = input[i];
+                        i++;
+                        k++;
                     } else {
-                        cache[p] = input[rp];
-                        rp++;
-                        p++;
+                        cache[k] = input[j];
+                        j++;
+                        k++;
                     }
                 }
 
-                while (lp <= mid) {
-                    cache[p] = input[lp];
-                    lp++;
-                    p++;
+                while (i <= lmid) {
+                    cache[k] = input[i];
+                    i++;
+                    k++;
                 }
 
-                p = left;
-                while (p <= right) {
-                    input[p] = cache[p];
+                k--;
+                while (k >= left) {
+                    input[k] = cache[k];
+                    k--;
                 }
             }
         }
     }
-
 }

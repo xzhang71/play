@@ -3,53 +3,50 @@ package sort;
 /**
  * Created by xzhang on 6/23/14.
  */
-public class QuickSort extends Sort {
+public class QuickSort {
 
     public static void main(String[] args) {
         int[] input = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
-        QuickSort sort = new QuickSort();
-        sort.sort(input);
+        QuickSort.sort(input);
         for (int i = 0; i < input.length; i++) {
             System.out.print(input[i] + " ");
         }
     }
 
-    public void sort(int[] input) {
-        sortGo(input, 0, input.length - 1);
+    public static void sort(int[] input) {
+        sort(input, 0, input.length - 1);
     }
 
-    public void sortGo(int[] input, int left, int right) {
+    public static void sort(int[] input, int left, int right) {
         if (left >= right) {
             return;
         }
 
-        int mid = (left + right) / 2;
-        int pivot = input[mid];
-        int lp = left;
-        int rp = right;
+        int pivot = input[(left + right) / 2];
+        int i = left;
+        int j = right;
 
-        while (lp < rp) {
-            while (input[lp] < pivot) {
-                lp++;
+        while (i < j) {
+            while (input[i] < pivot) {
+                i++;
             }
 
-            while (input[rp] > pivot) {
-                rp--;
+            while (input[j] > pivot) {
+                j--;
             }
 
-            if (lp <= rp) {
-                if (lp < rp) {
-                    int temp = input[lp];
-                    input[lp] = input[rp];
-                    input[rp] = temp;
+            if (i <= j) {
+                if (i != j) {
+                    int temp = input[i];
+                    input[i] = input[j];
+                    input[j] = temp;
                 }
-                lp++;
-                rp--;
+                i++;
+                j--;
             }
         }
 
-        sortGo(input, left, rp);
-        sortGo(input, lp, right);
+        sort(input, left, j);
+        sort(input, i, right);
     }
-
 }
