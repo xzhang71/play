@@ -3,32 +3,9 @@ package cci.temp;
 /**
  * Created by xzhang on 6/24/14.
  */
-public class SearchMatrix {
+public class MatrixSearch {
 
-    public static void main(String[] args) {
-        SearchMatrix obj = new SearchMatrix();
-
-        int[][] matrix = {
-                {10, 25, 70, 75},
-                {20, 35, 80, 85},
-                {30, 45, 90, 95},
-                {40, 55, 100, 105}
-        };
-
-//        for (int x = 0; x < matrix.length; x++) {
-//            for (int y = 0; y < matrix[x].length; y++) {
-//                int[] result = obj.searchMatrix(matrix, matrix[x][y]);
-//                System.out.printf("[%d, %d]", result[0], result[1]);
-//            }
-//            System.out.println();
-//        }
-
-        int[] result = obj.searchMatrix(matrix, 10);
-        System.out.printf("[%d, %d]", result[0], result[1]);
-        System.out.println();
-    }
-
-    private int[] searchMatrix(int[][] matrix, int target) {
+    private static int[] searchMatrix(int[][] matrix, int target) {
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
             return null;
         }
@@ -37,7 +14,7 @@ public class SearchMatrix {
         return searchMatrixGo(matrix, target, x0, y0, x1, y1);
     }
 
-    private int[] searchMatrixGo(int[][] matrix, int target, int x0, int y0, int x1, int y1) {
+    private static int[] searchMatrixGo(int[][] matrix, int target, int x0, int y0, int x1, int y1) {
         if (x0 == x1) {
             return searchHorizontal(matrix, target, x0, y0, y1);
         }
@@ -55,7 +32,7 @@ public class SearchMatrix {
             if (cx0 == cx1 && cy0 == cy1) {
                 if (matrix[cx0][cy0] == target) {
                     return new int[]{cx0, cy0};
-                } else if (matrix[cx0][cy0] >= target) {
+                } else if (matrix[cx0][cy0] > target) {
                     int[] downleft = searchMatrixGo(matrix, target, cx0, y0, x1, cy0 - 1);
                     if (downleft != null) {
                         return downleft;
@@ -89,7 +66,7 @@ public class SearchMatrix {
         return null;
     }
 
-    private int[] searchHorizontal(int[][] matrix, int target, int x, int y0, int y1) {
+    private static int[] searchHorizontal(int[][] matrix, int target, int x, int y0, int y1) {
         // TODO: linear search to binary search
         for (int i = y0; i <= y1; i++) {
             if (target == matrix[x][i]) {
@@ -102,7 +79,7 @@ public class SearchMatrix {
         return null;
     }
 
-    private int[] searchVertical(int[][] matrix, int target, int x0, int x1, int y) {
+    private static int[] searchVertical(int[][] matrix, int target, int x0, int x1, int y) {
         // TODO: linear search to binary search
         for (int i = x0; i <= x1; i++) {
             if (target == matrix[i][y]) {
@@ -113,5 +90,27 @@ public class SearchMatrix {
             }
         }
         return null;
+    }
+
+
+    public static void main(String[] args) {
+        int[][] matrix = {
+                {10, 25, 70, 75},
+                {20, 35, 80, 85},
+                {30, 45, 90, 95},
+                {40, 55, 100, 105}
+        };
+
+//        for (int x = 0; x < matrix.length; x++) {
+//            for (int y = 0; y < matrix[x].length; y++) {
+//                int[] result = obj.searchMatrix(matrix, matrix[x][y]);
+//                System.out.printf("[%d, %d]", result[0], result[1]);
+//            }
+//            System.out.println();
+//        }
+
+        int[] result = MatrixSearch.searchMatrix(matrix, 10);
+        System.out.printf("[%d, %d]", result[0], result[1]);
+        System.out.println();
     }
 }
