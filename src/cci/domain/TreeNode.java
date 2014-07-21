@@ -7,12 +7,18 @@ import java.util.Stack;
  */
 public class TreeNode {
     public int val;
+    public int rank;
     public TreeNode parent = null;
     public TreeNode left;
     public TreeNode right;
 
     public TreeNode(int val) {
         this.val = val;
+    }
+
+    public TreeNode(int val, int rank) {
+        this.val = val;
+        this.rank = rank;
     }
 
     public static void preorderRecursiveTraversal(TreeNode root) {
