@@ -7,17 +7,9 @@ import java.util.List;
  */
 public class Main {
 
-
     public static void main(String[] args) {
-        List outer = new ArrayList();
-
-        if (true) {
-            List inner = new ArrayList();
-            inner.add(new Object());
-
-            outer = inner;
+        for (int i = 0; i < 32; i++) {
+            System.out.println(0x80000000 >> i);
         }
-
-        System.out.println(outer.size());
     }
 }

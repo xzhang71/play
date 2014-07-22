@@ -82,7 +82,7 @@ public class MathAddOnly {
 
         System.out.println();
 
-        // 222
+        // -1
         System.out.println(MathAddOnly.divide(111, -111));
         System.out.println(111 / (-111));
         // -2147483647

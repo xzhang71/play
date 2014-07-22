@@ -6,11 +6,11 @@ package cci;
 public class BitSwapOddEven {
 
     public static int swap(int n) {
-        return ((n & 0xAAAAAAAA) >> 1) | ((n & 0x55555555) << 1);
+        return ((n & 0xAAAAAAAA) >>> 1) | ((n & 0x55555555) << 1);
     }
 
     public static void main(String[] args) {
-        int n = 21845; // 0101 0101 0101 0101
-        System.out.println(BitSwapOddEven.swap(n)); // 43690
+        int n = 0x80005555; // 0101 0101 0101 0101
+        System.out.println(BitSwapOddEven.swap(n) == 0x4000AAAA);
     }
 }

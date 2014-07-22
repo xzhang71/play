@@ -7,7 +7,7 @@ import java.util.Stack;
  */
 public class TreeNode {
     public int val;
-    public int rank;
+    public int leftBranchSize;
     public TreeNode parent = null;
     public TreeNode left;
     public TreeNode right;
@@ -16,9 +16,9 @@ public class TreeNode {
         this.val = val;
     }
 
-    public TreeNode(int val, int rank) {
+    public TreeNode(int val, int leftBranchSize) {
         this.val = val;
-        this.rank = rank;
+        this.leftBranchSize = leftBranchSize;
     }
 
     public static void preorderRecursiveTraversal(TreeNode root) {

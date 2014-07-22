@@ -9,17 +9,20 @@ public class BitFlipToEqual {
         int diff = a ^ b;
 
         int numOfFlips = 0;
-        while (diff != 0) {
-            numOfFlips += diff & 1;
-            diff >>= 1;
+        int i = 1;
+        while (i != 0) {
+            if ((diff & i) != 0) {
+                numOfFlips++;
+            }
+            i = i << 1;
         }
 
         return numOfFlips;
     }
 
     public static void main(String[] args) {
-        int a = 29; // 11101
-        int b = 15; // 01111
-        System.out.println(BitFlipToEqual.numOfFlips(a, b)); // 2
+        int a = 0x0000000C;  // 0...1100
+        int b = 0x80000003;  // 1...0011
+        System.out.println(BitFlipToEqual.numOfFlips(a, b)); // 5
     }
 }

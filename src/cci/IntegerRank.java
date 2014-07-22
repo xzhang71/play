@@ -14,22 +14,21 @@ public class IntegerRank {
             root = new TreeNode(val, 0);
         } else {
             TreeNode current = root;
-            int rank = 0;
             while (true) {
                 if (val <= current.val) {
-                    current.rank++;
-                    if (current.left != null) {
-                        current = current.left;
-                    } else {
-                        current.left = new TreeNode(val, rank);
+                    current.leftBranchSize++;
+                    if (current.left == null) {
+                        current.left = new TreeNode(val, 0);
                         break;
+                    } else {
+                        current = current.left;
                     }
                 } else {
-                    if (current.right != null) {
-                        current = current.right;
-                    } else {
-                        current.right = new TreeNode(val, current.rank + 1);
+                    if (current.right == null) {
+                        current.right = new TreeNode(val, 0);
                         break;
+                    } else {
+                        current = current.right;
                     }
                 }
             }
@@ -38,20 +37,22 @@ public class IntegerRank {
 
     public static int getRankOfNumber(int val) {
         TreeNode current = root;
+        int rank = 0;
         while (current != null) {
-            if (val < current.val) {
+            if (val == current.val) {
+                return rank + current.leftBranchSize;
+            } else if (val < current.val) {
                 current = current.left;
-            } else if (val > current.val) {
-                current = current.right;
             } else {
-                return current.rank;
+                rank += current.leftBranchSize + 1;
+                current = current.right;
             }
         }
         return -1;
     }
 
     public static void main(String[] args) {
-        int[] input = {5, 1, 4, 4, 5, 9, 7, 13, 3};
+        int[] input = {5, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
         for (int i : input) {
             IntegerRank.track(i);
