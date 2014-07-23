@@ -19,7 +19,7 @@ public class BinarySearchRotated {
 
             int mid = (l + r) / 2;
 
-            if (input[l] >= input[mid]) {
+            if (input[l] > input[mid]) {
                 if (input[mid + 1] <= val && val <= input[r]) {
                     l = mid + 1;
                 } else {

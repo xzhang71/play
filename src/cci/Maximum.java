@@ -20,10 +20,11 @@ public class Maximum {
         int signb = b >>> 31;
         int signc = c >>> 31;
 
-        int signab = signa ^ signb; // same -> 0 otherwise -> 1
-        int sign = signc * (1 ^ signab) + signa * signab;
+        int signab = signa ^ signb; // if(same) 0, different 1
 
-        return a * (1 ^ sign) + b * sign;
+        int sign = (signab ^ 1) * signc + signab * signa; // if(same) signc, else signa
+
+        return (sign ^ 1) * a + sign * b;
     }
 
     public static void main(String[] args) {
@@ -34,8 +35,5 @@ public class Maximum {
             int r2 = Math.max(a, b);
             System.out.printf("Maximum of %d and %d is %d, %s\n", a, b, r1, r1 == r2);
         }
-
-        System.out.println(0x7fffffff);
-        System.out.println(-1 >>> 1);
     }
 }

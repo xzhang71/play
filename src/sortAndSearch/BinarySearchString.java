@@ -1,9 +1,9 @@
-package cci;
+package sortAndSearch;
 
 /**
  * Created by xzhang71 on 7/20/14.
  */
-public class StringSearch {
+public class BinarySearchString {
 
     public static int binarySearch(String[] input, String val) {
         int l = 0;
@@ -48,10 +48,10 @@ public class StringSearch {
     public static void main(String[] args) {
         String[] input = {"", "", "at", "", "", "ball", "", "", "", "car", "", "", "", "", "dad", "", ""};
 
-        System.out.println(StringSearch.binarySearch(input, "at"));
-        System.out.println(StringSearch.binarySearch(input, "ball"));
-        System.out.println(StringSearch.binarySearch(input, "car"));
-        System.out.println(StringSearch.binarySearch(input, "dad"));
-        System.out.println(StringSearch.binarySearch(input, "egg"));
+        System.out.println(BinarySearchString.binarySearch(input, "at"));
+        System.out.println(BinarySearchString.binarySearch(input, "ball"));
+        System.out.println(BinarySearchString.binarySearch(input, "car"));
+        System.out.println(BinarySearchString.binarySearch(input, "dad"));
+        System.out.println(BinarySearchString.binarySearch(input, "egg"));
     }
 }

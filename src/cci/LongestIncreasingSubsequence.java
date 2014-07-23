@@ -11,16 +11,16 @@ public class LongestIncreasingSubsequence {
         }
 
         int[] cache = new int[input.length];
-        cache[0] = 1;
-        int longest = 1;
+        int longest = 0;
 
-        for (int i = 1; i < input.length; i++) {
+        for (int i = 0; i < input.length; i++) {
+            cache[i] = 1;
             for (int j = 0; j < i; j++) {
                 if (input[i] > input[j]) {
-                    cache[i] = cache[j] + 1;
-                    longest = Math.max(longest, cache[i]);
+                    cache[i] = Math.max(cache[i], cache[j] + 1);
                 }
             }
+            longest = Math.max(longest, cache[i]);
         }
 
         return longest;

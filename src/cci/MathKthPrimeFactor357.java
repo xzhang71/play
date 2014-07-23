@@ -9,6 +9,10 @@ import java.util.Queue;
 public class MathKthPrimeFactor357 {
 
     public static int findKth(int k) {
+        if (k <= 0) {
+            return 0;
+        }
+
         Queue<Integer> q3 = new LinkedList<>(), q5 = new LinkedList<>(), q7 = new LinkedList<>();
 
         q3.add(3);

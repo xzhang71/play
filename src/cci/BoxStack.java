@@ -20,7 +20,7 @@ public class BoxStack {
         int maxHeight = 0;
 
         for (int i = 0; i < boxes.length; i++) {
-            if (bottom == null || boxes[i].isAbove(bottom)) {
+            if (bottom == null || boxes[i].canBeAbove(bottom)) {
                 List<Box> newStack = highestBoxStack(boxes, boxes[i], cache);
                 int newHeight = boxStackHeight(newStack);
                 if (newHeight > maxHeight) {
@@ -35,7 +35,7 @@ public class BoxStack {
         }
 
         if (bottom != null) {
-            maxStack.add(0, bottom);
+            maxStack.add(bottom);
             cache.put(bottom, maxStack);
         }
 
@@ -56,25 +56,25 @@ public class BoxStack {
     }
 
     public static List<Box> highestBoxStack2(Box[] boxes) {
-        Set<Box> bottomSet = new HashSet<>();
+        Set<Box> bottoms = new HashSet<>();
         for (Box b : boxes) {
-            bottomSet.add(b);
+            bottoms.add(b);
         }
 
         Map<Box, Set<Box>> graph = new HashMap<>();
         for (int i = 0; i < boxes.length; i++) {
-            Set<Box> tempSet = new HashSet<>();
+            Set<Box> children = new HashSet<>();
             for (int j = 0; j < boxes.length; j++) {
-                if (boxes[j].isAbove(boxes[i])) {
-                    tempSet.add(boxes[j]);
-                    bottomSet.remove(boxes[j]);
+                if (boxes[j].canBeAbove(boxes[i])) {
+                    bottoms.remove(boxes[j]);
+                    children.add(boxes[j]);
                 }
             }
-            graph.put(boxes[i], tempSet);
+            graph.put(boxes[i], children);
         }
 
         // IMPORTANT
-        graph.put(null, bottomSet);
+        graph.put(null, bottoms);
 
         return highestBoxStack2(graph, null, new HashMap<Box, List<Box>>());
     }
@@ -84,15 +84,15 @@ public class BoxStack {
             return cache.get(bottom);
         }
 
-        List<Box> maxStack = null;
         int maxHeight = 0;
+        List<Box> maxStack = null;
 
         for (Box b : graph.get(bottom)) {
-            List<Box> newMaxStack = new ArrayList<>(highestBoxStack2(graph, b, cache));
-            int newMaxHeight = boxStackHeight(newMaxStack);
-            if (newMaxHeight > maxHeight) {
-                maxHeight = newMaxHeight;
-                maxStack = newMaxStack;
+            List<Box> newStack = new ArrayList(highestBoxStack2(graph, b, cache));
+            int newHeight = boxStackHeight(newStack);
+            if (newHeight > maxHeight) {
+                maxHeight = newHeight;
+                maxStack = newStack;
             }
         }
 
@@ -135,7 +135,7 @@ class Box {
         this.d = d;
     }
 
-    boolean isAbove(Box other) {
+    boolean canBeAbove(Box other) {
         return w < other.w && h < other.h && d < other.d;
     }
 }

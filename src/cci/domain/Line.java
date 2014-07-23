@@ -16,7 +16,7 @@ public class Line {
         }
         if (p1.x == p2.x) {
             infiniteSlope = true;
-            intercept = p1.x;
+            intercept = p1.x; // x intercept
         } else {
             slope = calibrate((p2.y - p1.y) / (p2.x - p1.x));
             intercept = calibrate(p1.y - slope * p1.x);
