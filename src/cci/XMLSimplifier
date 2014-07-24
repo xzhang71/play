@@ -1,0 +1,50 @@
+package cci;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * Created by xzhang71 on 7/23/14.
+ */
+public class XMLSimplifier {
+
+    private static Map<String, Integer> library = new HashMap<>();
+
+    static {
+        library.put("family", 1);
+        library.put("person", 2);
+        library.put("firstName", 3);
+        library.put("lastName", 4);
+        library.put("state", 5);
+    }
+
+    public static void encode(Element element, StringBuffer sb) {
+        encode(element.getTagName(), sb);
+        for (Attribute attr : element.getAttributes()) {
+            encode(attr, sb);
+        }
+        encode("0", sb);
+        if(element.getValue() != null) {
+            encode(element.getValue(), sb);
+        } else {
+            for(Element e : element.getChildren()) {
+                encode(e, sb);
+            }
+        }
+        encode("0", sb);
+    }
+
+    public static void encode(Attr attr, StringBuffer sb) {
+        encode(attr.getName(), sb);
+        encode(attr.getValue(), sb);
+    }
+
+    public static void encode(String content, StringBuffer sb) {
+        if (library.containsKey(content)) {
+            sb.append(library.get(content));
+        } else {
+            sb.append(content);
+        }
+        sb.append(" ");
+    }
+}

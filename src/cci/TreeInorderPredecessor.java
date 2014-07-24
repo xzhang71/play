@@ -12,10 +12,6 @@ public class TreeInorderPredecessor {
             return node.left;
         }
 
-        if (node.parent.right == node) {
-            return node.parent;
-        }
-
         TreeNode current = node;
         while (current.parent != null && current.parent.left == node) {
             current = current.parent;

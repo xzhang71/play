@@ -13,24 +13,20 @@ public class TreeCommonAncestor {
         return lowestCommonAncestorGo(root, node1, node2);
     }
 
-    private static boolean search(TreeNode root, TreeNode target) {
+    private static boolean search(TreeNode root, TreeNode node) {
         if (root == null) {
             return false;
         }
 
-        if (root == target) {
+        if (root == node) {
             return true;
         }
 
-        return search(root.left, target) || search(root.right, target);
+        return search(root.left, node) || search(root.right, node);
     }
 
     private static TreeNode lowestCommonAncestorGo(TreeNode root, TreeNode node1, TreeNode node2) {
-        if (root == null) {
-            return null;
-        }
-
-        if (root == node1 || root == node2) {
+        if (root == null || root == node1 || root == node2) {
             return root;
         }
 
