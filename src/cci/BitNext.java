@@ -21,7 +21,6 @@ public class BitNext {
         }
 
         if (zeros + ones >= 31) {
-            System.out.print("invalid input.");
             return n;
         }
 
@@ -61,7 +60,6 @@ public class BitNext {
         }
 
         if (zeros + ones >= 31) {
-            System.out.print("invalid input.");
             return n;
         }
 

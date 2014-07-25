@@ -12,7 +12,7 @@ public class BitHorizontalLinePrint {
             screen[lineOffSet + i] = (byte) 0xFF;
         }
 
-        screen[lineOffSet + x0 / 8] &= 0xFF >> (x0 % 8);
+        screen[lineOffSet + x0 / 8] &= 0xFF >>> (x0 % 8);
         screen[lineOffSet + x1 / 8] &= 0xFF << (8 - (x1 % 8 + 1));
     }
 

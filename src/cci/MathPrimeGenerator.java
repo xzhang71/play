@@ -19,7 +19,7 @@ public class MathPrimeGenerator {
             if (flags[i]) {
                 primes.add(i);
                 for (int j = i + 1; j < n + 1; j++) {
-                    if (j % i == 0) {
+                    if (flags[j] && j % i == 0) {
                         flags[j] = false;
                     }
                 }

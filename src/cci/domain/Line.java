@@ -34,12 +34,12 @@ public class Line {
      * @return
      */
     public boolean intersect(Line other) {
-        if (infiniteSlope && other.infiniteSlope && intercept == other.intercept) {
-            return true;
+        if (infiniteSlope && other.infiniteSlope) {
+            return intercept == other.intercept;
         } else if (infiniteSlope || other.infiniteSlope) {
             return false;
         } else {
-            return slope == other.slope && intercept == other.intercept;
+            return slope != other.slope || (slope == other.slope && intercept == other.intercept);
         }
     }
 

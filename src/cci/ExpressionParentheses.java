@@ -71,30 +71,27 @@ public class ExpressionParentheses {
         StringBuilder sb = new StringBuilder();
         for (String ls : left) {
             sb.delete(0, sb.length());
-
-            if (ls.length() > 1) {
-                sb.append('(');
-                sb.append(ls);
-                sb.append(')');
-            } else {
-                sb.append(ls);
-            }
+            append(sb, ls);
             sb.append(operator);
 
             for (String rs : right) {
-                if (rs.length() > 1) {
-                    sb.append('(');
-                    sb.append(rs);
-                    sb.append(')');
-                } else {
-                    sb.append(rs);
-                }
+                append(sb, rs);
                 result.add(sb.toString());
                 sb.delete(ls.length() + 1, sb.length());
             }
         }
 
         return result;
+    }
+
+    private static void append(StringBuilder sb, String str) {
+        if (str.length() > 1) {
+            sb.append('(');
+            sb.append(str);
+            sb.append(')');
+        } else {
+            sb.append(str);
+        }
     }
 
     public static void main(String[] args) {
