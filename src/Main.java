@@ -9,8 +9,17 @@ public class Main {
 
 
     public static void main(String[] args) {
-        for (int i = 0; i < 32; i++) {
-            System.out.println(0x80000000 >> i);
-        }
+        int a = -2147483647;
+        int b = -2;
+        System.out.println(a + b);
+
+        int c = 2147483647;
+        int d = 2;
+        System.out.println(~(c + d) + 1);
+
+        int e = -2147483647;
+        int f = 2;
+        // e - f = e + (-f)
+        System.out.println(e + (~f + 1));
     }
 }

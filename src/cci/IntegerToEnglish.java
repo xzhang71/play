@@ -21,17 +21,15 @@ public class IntegerToEnglish {
         StringBuilder sb = new StringBuilder();
 
         while (n > 0) {
-            if (n % 1000 != 0) {
-                sb.insert(0, integerToEnglish100(n % 1000) + bigs[count] + " ");
-                n = n / 1000;
-                count++;
-            }
+            sb.insert(0, integerToEnglish1000(n % 1000) + bigs[count] + ' ');
+            n = n / 1000;
+            count++;
         }
 
-        return sb.toString();
+        return sb.toString().trim();
     }
 
-    public static String integerToEnglish100(int n) {
+    public static String integerToEnglish1000(int n) {
         StringBuilder sb = new StringBuilder();
 
         if (n >= 100) {
@@ -40,15 +38,15 @@ public class IntegerToEnglish {
         }
 
         if (n >= 11 && n <= 19) {
-            sb.append(teens[n - 11] + " ");
+            sb.append(teens[n - 11] + ' ');
             return sb.toString();
         } else if (n == 10 || n >= 20) {
-            sb.append(tens[n / 10 - 1] + " ");
+            sb.append(tens[n / 10 - 1] + ' ');
             n = n % 10;
         }
 
-        if (n >= 1 && n <= 9) {
-            sb.append(digits[n - 1] + " ");
+        if (n > 0) {
+            sb.append(digits[n - 1] + ' ');
         }
 
         return sb.toString();
