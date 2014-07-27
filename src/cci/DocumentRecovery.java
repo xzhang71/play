@@ -26,27 +26,23 @@ public class DocumentRecovery {
 
         Document doc = null;
 
-        int i = index + 1;
-        while (i <= content.length()) {
+        for (int i = index + 1; i <= content.length(); i++) {
             Document newDoc = recover(content, dict, i, cache);
-
-            String current = content.substring(index, i);
+            String word = content.substring(index, i);
             int newNum = newDoc.num;
-
-            if (!dict.contains(current)) {
-                current = current.toUpperCase();
-                newNum += current.length();
+            if (!dict.contains(word)) {
+                word = word.toUpperCase();
+                newNum += word.length();
             }
-
-            if (doc == null || newNum <= doc.num) {
-                if (doc == null) {
-                    doc = new Document();
-                }
+            if (doc == null || doc.num >= newNum) {
+                doc = new Document();
                 doc.num = newNum;
-                doc.content = current + ' ' + newDoc.content;
+                doc.content = word + ' ' + newDoc.content;
             }
+        }
 
-            i++;
+        if (doc == null) {
+            doc = new Document();
         }
 
         cache.put(index, doc);
