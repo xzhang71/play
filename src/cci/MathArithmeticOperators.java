@@ -39,6 +39,7 @@ public class MathArithmeticOperators {
             b = ~b + 1;
         }
 
+        /*
         while (b != 0) {
             if ((b & 1) != 0) {
                 r += a;
@@ -46,6 +47,9 @@ public class MathArithmeticOperators {
             a = a << 1;
             b = b >> 1;
         }
+        */
+        r += multiplyGo(a, b);
+
         if (isPos) {
             return r;
         } else {
@@ -53,7 +57,15 @@ public class MathArithmeticOperators {
         }
     }
 
+    private static int multiplyGo(int a, int b) {
+        if (b == 0) {
+            return 0;
+        }
+        return (b & 1) * a + multiplyGo(a << 1, b >> 1);
+    }
+
     public static int divide(int a, int b) {
+        // IMPORTANT
         if (b == 0) {
             throw new ArithmeticException("divided by 0");
         }
@@ -78,25 +90,42 @@ public class MathArithmeticOperators {
             isPos = !isPos;
             a = ~a + 1;
         }
-        int i = 1;
+        int p = 1;
         while ((a >> 1) >= b) {
             b = b << 1;
-            i = i << 1;
+            p = p << 1;
         }
+
+        /*
         int s = 0;
-        while (i != 0) {
+        while (p != 0) {
             if (a - s >= b) {
-                r += i;
+                r += p;
                 s += b;
             }
-            i = i >> 1;
+            p = p >> 1;
             b = b >> 1;
         }
+        */
+        r += divideGo(a, b, p);
+
         if (isPos) {
             return r;
         } else {
             return ~r + 1;
         }
+    }
+
+    private static int divideGo(int a, int b, int p) {
+        if (p == 0) {
+            return 0;
+        }
+        int r = 0;
+        if (a >= b) {
+            r += p;
+            a = a - b;
+        }
+        return r + divideGo(a, b >> 1, p >> 1);
     }
 
     public static void main(String[] args) {

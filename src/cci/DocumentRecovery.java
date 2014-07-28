@@ -9,17 +9,16 @@ import java.util.Set;
  * Created by xzhang71 on 7/25/14.
  */
 public class DocumentRecovery {
-    public static String recover(String content, Set<String> dict) {
-        Document doc = recover(content, dict, 0, new HashMap<Integer, Document>());
-        return doc.content;
+    public static Document recover(String content, Set<String> dict) {
+        return recover(content, 0, dict, new HashMap<Integer, Document>());
     }
 
-    public static Document recover(String content, Set<String> dict, int index, Map<Integer, Document> cache) {
+    public static Document recover(String content, int index, Set<String> dict, Map<Integer, Document> cache) {
         if (cache.containsKey(index)) {
             return cache.get(index);
         }
 
-        if (index >= content.length()) {
+        if (index == content.length()) {
             cache.put(index, new Document());
             return cache.get(index);
         }
@@ -27,22 +26,24 @@ public class DocumentRecovery {
         Document doc = null;
 
         for (int i = index + 1; i <= content.length(); i++) {
-            Document newDoc = recover(content, dict, i, cache);
-            String word = content.substring(index, i);
+            String left = content.substring(index, i);
+            Document newDoc = recover(content, i, dict, cache);
             int newNum = newDoc.num;
-            if (!dict.contains(word)) {
-                word = word.toUpperCase();
-                newNum += word.length();
+            if (!dict.contains(left)) {
+                left = left.toUpperCase();
+                newNum += left.length();
             }
-            if (doc == null || doc.num >= newNum) {
-                doc = new Document();
+            if (doc == null || newNum <= doc.num) {
+                if (doc == null) {
+                    doc = new Document();
+                }
                 doc.num = newNum;
-                doc.content = word + ' ' + newDoc.content;
+                if (newDoc.content.isEmpty()) {
+                    doc.content = left;
+                } else {
+                    doc.content = left + " " + newDoc.content;
+                }
             }
-        }
-
-        if (doc == null) {
-            doc = new Document();
         }
 
         cache.put(index, doc);
@@ -58,8 +59,8 @@ public class DocumentRecovery {
         dict.add("her");
         dict.add("brother");
 
-        String newContent = DocumentRecovery.recover(content, dict);
-        System.out.println(newContent);
+        Document recoveredDoc = DocumentRecovery.recover(content, dict);
+        System.out.printf("num: %d\ncontent: %s\n", recoveredDoc.num, recoveredDoc.content);
     }
 }
 

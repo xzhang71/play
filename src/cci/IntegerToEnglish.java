@@ -14,7 +14,12 @@ public class IntegerToEnglish {
         if (n == 0) {
             return "Zero";
         } else if (n < 0) {
-            return "Negative " + integerToEnglish(-n);
+            // IMPORTANT: Integer.MIN_VALUE
+            if (n == Integer.MIN_VALUE) {
+                return "Negative " + integerToEnglish(-(n + 8)) + " Eight";
+            } else {
+                return "Negative " + integerToEnglish(-n);
+            }
         }
 
         int count = 0;
@@ -56,5 +61,6 @@ public class IntegerToEnglish {
         for (int i = 1; i > 0; i *= 3) {
             System.out.printf("%10d -> %s\n", i, IntegerToEnglish.integerToEnglish(i));
         }
+        System.out.printf("%10d -> %s\n", Integer.MIN_VALUE, IntegerToEnglish.integerToEnglish(Integer.MIN_VALUE));
     }
 }

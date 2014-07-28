@@ -9,6 +9,7 @@ import java.util.Map;
  * Created by xzhang71 on 7/26/14.
  */
 public class WordDistance {
+
     public static int minDistance(String[] words, String word1, String word2) {
         int minDistance = -1;
         int index1 = -1;
@@ -57,9 +58,10 @@ public class WordDistance {
         List<Integer> list1 = cache.get(word1);
         List<Integer> list2 = cache.get(word2);
 
-        int minDistance = Math.abs(list1.get(0) - list2.get(0));
         int i = 0;
         int j = 0;
+        int minDistance = Math.abs(list1.get(i) - list2.get(j));
+
         while (i < list1.size() && j < list2.size()) {
             int p1 = list1.get(i);
             int p2 = list2.get(j);

@@ -88,7 +88,7 @@ public class BoxStack {
         List<Box> maxStack = null;
 
         for (Box b : graph.get(bottom)) {
-            List<Box> newStack = new ArrayList(highestBoxStack2(graph, b, cache));
+            List<Box> newStack = highestBoxStack2(graph, b, cache);
             int newHeight = boxStackHeight(newStack);
             if (newHeight > maxHeight) {
                 maxHeight = newHeight;
@@ -98,6 +98,8 @@ public class BoxStack {
 
         if (maxStack == null) {
             maxStack = new ArrayList<>();
+        } else {
+            maxStack = new ArrayList<>(maxStack);
         }
 
         if (bottom != null) {

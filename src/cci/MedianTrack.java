@@ -14,26 +14,26 @@ import java.util.PriorityQueue;
 public class MedianTrack {
 
     private PriorityQueue<Integer> top;
-    private PriorityQueue<Integer> tail;
+    private PriorityQueue<Integer> bottom;
 
     public MedianTrack() {
         top = new PriorityQueue<>();
-        tail = new PriorityQueue<>(11, Collections.reverseOrder());
+        bottom = new PriorityQueue<>(11, Collections.reverseOrder());
     }
 
-    public void insert(int number) {
-        if (top.size() == tail.size()) {
-            top.add(number);
+    public void insert(int n) {
+        if (top.size() == bottom.size()) {
+            top.add(n);
         } else {
-            tail.add(number);
+            bottom.add(n);
         }
-        tail.add(top.poll());
-        top.add(tail.poll());
+        bottom.add(top.poll());
+        top.add(bottom.poll());
     }
 
     public double getMedian() {
-        if (top.size() == tail.size()) {
-            return 0.5 * (top.peek() + tail.peek());
+        if (top.size() == bottom.size()) {
+            return (top.peek() + bottom.peek()) * 0.5;
         } else {
             return top.peek();
         }
@@ -42,19 +42,19 @@ public class MedianTrack {
     public static void main(String[] args) {
         MedianTrack obj = new MedianTrack();
         obj.insert(3);
-        System.out.println(obj.getMedian());
+        System.out.println(obj.getMedian()); // 3.0
 
         obj.insert(4);
-        System.out.println(obj.getMedian());
+        System.out.println(obj.getMedian()); // 3.5
 
         obj.insert(5);
-        System.out.println(obj.getMedian());
+        System.out.println(obj.getMedian()); // 4.0
 
         obj.insert(1);
-        System.out.println(obj.getMedian());
+        System.out.println(obj.getMedian()); // 3.5
 
         obj.insert(2);
-        System.out.println(obj.getMedian());
+        System.out.println(obj.getMedian()); // 3.0
 
         // ...
     }

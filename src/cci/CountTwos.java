@@ -3,14 +3,14 @@ package cci;
 /**
  * Created by xzhang71 on 7/26/14.
  */
-public class Count2s {
-    public static int count2s(int n) {
+public class CountTwos {
+    public static int countTwos(int n) {
         // IMPORTANT
         if (n < 0) {
             if (n == Integer.MIN_VALUE) {
-                return count2s(-(n + 1)) + 1;
+                return countTwos(-(n + 1)) + 1;
             } else {
-                return count2s(-n);
+                return countTwos(-n);
             }
         }
 
@@ -31,6 +31,7 @@ public class Count2s {
             if (Integer.MAX_VALUE / p < 10) {
                 break;
             }
+            // IMPORTANT: p * 10 != p << 1
             p = p * 10;
         }
 
@@ -62,7 +63,7 @@ public class Count2s {
     }
 
     public static void main(String[] args) {
-        System.out.println(Count2s.count2s(Integer.MAX_VALUE)); // 373343123
-        System.out.println(Count2s.solution(Integer.MAX_VALUE));
+        System.out.println(CountTwos.countTwos(Integer.MAX_VALUE)); // 373343123
+        System.out.println(CountTwos.solution(Integer.MAX_VALUE));
     }
 }
