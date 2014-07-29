@@ -5,11 +5,11 @@ package cci;
  */
 public class SubsquareMaximumBlack {
 
-    public static Subsquare findSquare(int[][] matrix) {
-        SquareCell[][] processed = processSquare(matrix);
+    public static Subsquare findSubsquare(int[][] square) {
+        SquareCell[][] processedSquare = getProcessedSquare(square);
 
-        for (int i = processed.length; i >= 1; i--) {
-            Subsquare subsquare = findSubsquareWithSize(processed, i);
+        for (int size = processedSquare.length; size >= 1; size--) {
+            Subsquare subsquare = findSubsquareWithSize(processedSquare, size);
             if (subsquare != null) {
                 return subsquare;
             }
@@ -18,55 +18,50 @@ public class SubsquareMaximumBlack {
         return null;
     }
 
-    public static SquareCell[][] processSquare(int[][] matrix) {
-        SquareCell[][] processed = new SquareCell[matrix.length][matrix.length];
+    public static SquareCell[][] getProcessedSquare(int[][] square) {
+        int n = square.length;
+        SquareCell[][] processedSquare = new SquareCell[n][n];
 
-        for (int r = matrix.length - 1; r >= 0; r--) {
-            for (int c = matrix.length - 1; c >= 0; c--) {
+        for (int r = n - 1; r >= 0; r--) {
+            for (int c = n - 1; c >= 0; c--) {
                 int zerosRight = 0;
                 int zerosBelow = 0;
-                if (matrix[r][c] == 0) {
+                if (square[r][c] == 0) {
                     zerosRight++;
                     zerosBelow++;
-                    if (c + 1 < matrix.length) {
-                        SquareCell previous = processed[r][c + 1];
-                        zerosRight += previous.zerosRight;
+                    if (c < n - 1) {
+                        zerosRight += processedSquare[r][c + 1].zerosRight;
                     }
-                    if (r + 1 < matrix.length) {
-                        SquareCell previous = processed[r + 1][c];
-                        zerosBelow += previous.zerosBelow;
+                    if (r < n - 1) {
+                        zerosBelow += processedSquare[r + 1][c].zerosBelow;
                     }
                 }
-                processed[r][c] = new SquareCell(zerosRight, zerosBelow);
+                processedSquare[r][c] = new SquareCell(zerosRight, zerosBelow);
             }
         }
 
-        return processed;
+        return processedSquare;
     }
 
+    public static Subsquare findSubsquareWithSize(SquareCell[][] processed, int size) {
+        int count = processed.length - size;
 
-    public static Subsquare findSubsquareWithSize(SquareCell[][] processed, int squareSize) {
-        int count = processed.length - squareSize;
         for (int row = 0; row <= count; row++) {
             for (int col = 0; col <= count; col++) {
-                if (isSubsquare(processed, row, col, squareSize)) {
-                    return new Subsquare(row, col, squareSize);
+                if (isValidSubsquare(processed, row, col, size)) {
+                    return new Subsquare(row, col, size);
                 }
             }
         }
+
         return null;
     }
 
-    public static boolean isSubsquare(SquareCell[][] processed, int row, int col, int squareSize) {
+    public static boolean isValidSubsquare(SquareCell[][] processed, int row, int col, int squareSize) {
         SquareCell topLeft = processed[row][col];
         SquareCell topRight = processed[row][col + squareSize - 1];
         SquareCell bottomLeft = processed[row + squareSize - 1][col];
-
-        if (topLeft.zerosRight < squareSize || topLeft.zerosBelow < squareSize || topRight.zerosBelow < squareSize || bottomLeft.zerosRight < squareSize) {
-            return false;
-        }
-
-        return true;
+        return topLeft.zerosRight >= squareSize && topLeft.zerosBelow >= squareSize && topRight.zerosBelow >= squareSize && bottomLeft.zerosRight >= squareSize;
     }
 }
 

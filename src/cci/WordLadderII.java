@@ -34,7 +34,7 @@ public class WordLadderII {
         while (!graph.containsKey(start) && !level.isEmpty()) {
             while (!level.isEmpty()) {
                 String current = level.poll();
-                for (String s : getNeighbors(current)) {
+                for (String s : getNeighbors(dict, current)) {
                     if (s.equals(start)) {
                         List<String> tempList = graph.get(s);
                         if (tempList == null) {
@@ -96,7 +96,7 @@ public class WordLadderII {
         return result;
     }
 
-    private static List<String> getNeighbors(String s) {
+    private static List<String> getNeighbors(Set<String> dict, String s) {
         List<String> neighbors = new ArrayList<>();
         char[] charArr = s.toCharArray();
         for (int i = 0; i < charArr.length; i++) {
@@ -104,7 +104,10 @@ public class WordLadderII {
             for (char c = 'a'; c <= 'z'; c++) {
                 if (c != original) {
                     charArr[i] = c;
-                    neighbors.add(new String(charArr));
+                    String temp = new String(charArr);
+                    if (dict.contains(temp)) {
+                        neighbors.add(temp);
+                    }
                 }
             }
             charArr[i] = original;
