@@ -10,30 +10,30 @@ public class SubmatrixMaximumSum {
         int colCount = matrix[0].length;
         int[] partialSum = new int[colCount];
         int maxSum = 0;
-        for (int rowStart = 0; rowStart < rowCount; rowStart++) {
+        for (int startRow = 0; startRow < rowCount; startRow++) {
             clearArray(partialSum);
-            for (int rowEnd = rowStart; rowEnd < rowCount; rowEnd++) {
-                for (int i = 0; i < colCount; i++) {
-                    partialSum[i] += matrix[rowEnd][i];
+            for (int endRow = startRow; endRow < rowCount; endRow++) {
+                for (int col = 0; col < colCount; col++) {
+                    partialSum[col] += matrix[endRow][col];
                 }
-                int tempMaxSum = maxSubarray(partialSum);
+                int tempMaxSum = getMaxSum(partialSum);
                 maxSum = Math.max(maxSum, tempMaxSum);
             }
         }
         return maxSum;
     }
 
-    public static void clearArray(int[] array) {
-        for (int i = 0; i < array.length; i++) {
-            array[i] = 0;
+    public static void clearArray(int[] A) {
+        for (int i = 0; i < A.length; i++) {
+            A[i] = 0;
         }
     }
 
-    public static int maxSubarray(int[] array) {
+    public static int getMaxSum(int[] A) {
         int maxSum = 0;
         int runningSum = 0;
-        for (int i = 0; i < array.length; i++) {
-            runningSum = Math.max(runningSum + array[i], array[i]);
+        for (int i = 0; i < A.length; i++) {
+            runningSum = Math.max(runningSum + A[i], A[i]);
             maxSum = Math.max(maxSum, runningSum);
         }
         return maxSum;
