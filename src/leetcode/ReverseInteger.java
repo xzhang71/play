@@ -10,14 +10,14 @@ public class ReverseInteger {
     }
 
     public static int reverse(int x) {
-        long result = 0;
+        long r = 0;
         while (x != 0) {
-            result = result * 10 + x % 10;
+            r = r * 10 + x % 10;
             x = x / 10;
         }
-        if (result > Integer.MAX_VALUE || result < Integer.MIN_VALUE) {
+        if (r > Integer.MAX_VALUE || r < Integer.MIN_VALUE) {
             // do something
         }
-        return (int) result;
+        return (int) r;
     }
 }

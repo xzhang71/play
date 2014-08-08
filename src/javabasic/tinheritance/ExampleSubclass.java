@@ -1,4 +1,4 @@
-package javabasic.tinheritance;
+package javaBasic.tinheritance;
 
 /**
  * Created by xzhang71 on 7/7/14.

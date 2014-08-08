@@ -1,4 +1,4 @@
-package javabasic.tstatic;
+package javaBasic.tstatic;
 
 /**
  * Created by xzhang71 on 7/7/14.

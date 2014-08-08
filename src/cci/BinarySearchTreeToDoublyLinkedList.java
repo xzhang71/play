@@ -1,22 +1,22 @@
 package cci;
 
-import cci.domain.BiNode;
+import cci.domain.TreeNode;
 
 /**
  * Created by xzhang71 on 7/23/14.
  */
 public class BinarySearchTreeToDoublyLinkedList {
 
-    public static BiNode[] convert(BiNode root) {
+    public static TreeNode[] convert(TreeNode root) {
         if (root == null) {
             return null;
         }
 
-        BiNode[] result1 = convert(root.node1);
-        BiNode[] result2 = convert(root.node2);
+        TreeNode[] result1 = convert(root.left);
+        TreeNode[] result2 = convert(root.right);
 
-        BiNode leftHead = null;
-        BiNode leftTail = null;
+        TreeNode leftHead = null;
+        TreeNode leftTail = null;
 
         if (result1 == null) {
             leftHead = root;
@@ -24,12 +24,12 @@ public class BinarySearchTreeToDoublyLinkedList {
         } else {
             leftHead = result1[0];
             leftTail = result1[1];
-            leftTail.node2 = root;
-            root.node1 = leftTail;
+            leftTail.right = root;
+            root.left = leftTail;
         }
 
-        BiNode rightHead = null;
-        BiNode rightTail = null;
+        TreeNode rightHead = null;
+        TreeNode rightTail = null;
 
         if (result2 == null) {
             rightHead = root;
@@ -37,52 +37,52 @@ public class BinarySearchTreeToDoublyLinkedList {
         } else {
             rightHead = result2[0];
             rightTail = result2[1];
-            root.node2 = rightHead;
-            rightHead.node1 = root;
+            root.right = rightHead;
+            rightHead.left = root;
         }
 
-        return new BiNode[]{leftHead, rightTail};
+        return new TreeNode[]{leftHead, rightTail};
     }
 
-    public static void printLinkedList(BiNode[] headTail) {
+    public static void printLinkedList(TreeNode[] headTail) {
         StringBuilder sb1 = new StringBuilder();
-        BiNode head = headTail[0];
+        TreeNode head = headTail[0];
         while (head != null) {
             sb1.append(head.val + " ");
-            head = head.node2;
+            head = head.right;
         }
         System.out.println(sb1.toString());
 
         StringBuilder sb2 = new StringBuilder();
-        BiNode tail = headTail[1];
+        TreeNode tail = headTail[1];
         while (tail != null) {
             sb2.insert(0, tail.val + " ");
-            tail = tail.node1;
+            tail = tail.left;
         }
         System.out.println(sb2.toString());
     }
 
     public static void main(String[] args) {
-        BiNode node0 = new BiNode(0);
-        BiNode node1 = new BiNode(1);
-        BiNode node2 = new BiNode(2);
-        BiNode node3 = new BiNode(3);
-        BiNode node4 = new BiNode(4);
-        BiNode node5 = new BiNode(5);
-        BiNode node6 = new BiNode(6);
-        BiNode node7 = new BiNode(7);
-        BiNode node8 = new BiNode(8);
-        BiNode node9 = new BiNode(9);
+        TreeNode node0 = new TreeNode(0);
+        TreeNode node1 = new TreeNode(1);
+        TreeNode node2 = new TreeNode(2);
+        TreeNode node3 = new TreeNode(3);
+        TreeNode node4 = new TreeNode(4);
+        TreeNode node5 = new TreeNode(5);
+        TreeNode node6 = new TreeNode(6);
+        TreeNode node7 = new TreeNode(7);
+        TreeNode node8 = new TreeNode(8);
+        TreeNode node9 = new TreeNode(9);
 
-        node5.node1 = node0;
-        node0.node2 = node1;
-        node1.node2 = node2;
-        node2.node2 = node3;
-        node3.node2 = node4;
-        node5.node2 = node6;
-        node6.node2 = node7;
-        node7.node2 = node8;
-        node8.node2 = node9;
+        node5.left = node0;
+        node0.right = node1;
+        node1.right = node2;
+        node2.right = node3;
+        node3.right = node4;
+        node5.right = node6;
+        node6.right = node7;
+        node7.right = node8;
+        node8.right = node9;
 
         printLinkedList(convert(node5));
     }

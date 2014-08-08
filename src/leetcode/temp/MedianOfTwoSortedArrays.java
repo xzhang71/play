@@ -1,9 +1,9 @@
-package leetcode;
+package leetcode.temp;
 
 /**
  * Created by xzhang71 on 6/8/14.
  */
-public class MedianOfTwoSortedArray {
+public class MedianOfTwoSortedArrays {
 
     public static void main(String[] args) {
         int[] A = {3};
