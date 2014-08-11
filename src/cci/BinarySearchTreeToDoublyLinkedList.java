@@ -12,18 +12,18 @@ public class BinarySearchTreeToDoublyLinkedList {
             return null;
         }
 
-        TreeNode[] result1 = convert(root.left);
-        TreeNode[] result2 = convert(root.right);
+        TreeNode[] leftResult = convert(root.left);
+        TreeNode[] rightResult = convert(root.right);
 
         TreeNode leftHead = null;
         TreeNode leftTail = null;
 
-        if (result1 == null) {
+        if (leftResult == null) {
             leftHead = root;
             leftTail = root;
         } else {
-            leftHead = result1[0];
-            leftTail = result1[1];
+            leftHead = leftResult[0];
+            leftTail = leftResult[1];
             leftTail.right = root;
             root.left = leftTail;
         }
@@ -31,12 +31,12 @@ public class BinarySearchTreeToDoublyLinkedList {
         TreeNode rightHead = null;
         TreeNode rightTail = null;
 
-        if (result2 == null) {
+        if (rightResult == null) {
             rightHead = root;
             rightTail = root;
         } else {
-            rightHead = result2[0];
-            rightTail = result2[1];
+            rightHead = rightResult[0];
+            rightTail = rightResult[1];
             root.right = rightHead;
             rightHead.left = root;
         }

@@ -18,39 +18,42 @@ public class StringToIntegerATOI {
             index++;
         }
 
-        boolean isNegative = false;
-
-        if (index < str.length()) {
-            if (str.charAt(index) == '+') {
-                index++;
-            } else if (str.charAt(index) == '-') {
-                isNegative = true;
-                index++;
-            }
+        if (index == str.length()) {
+            return 0;
         }
 
-        // put all valid characters into string buffer
+        boolean isPos = true;
+        if (str.charAt(index) == '+') {
+            index++;
+        } else if (str.charAt(index) == '-') {
+            index++;
+            isPos = false;
+        }
+
         int result = 0;
-        for (int i = index; i < str.length(); i++) {
-            char c = str.charAt(i);
+        while (index < str.length()) {
+            char c = str.charAt(index);
             if (c < '0' || c > '9') {
                 break;
             }
 
-            int t = c - '0';
-            if (isNegative) {
-                t = -t;
+            int t;
+            if (isPos) {
+                t = c - '0';
+            } else {
+                t = '0' - c;
             }
 
-            if (!isNegative && (result > Integer.MAX_VALUE / 10 || (result == Integer.MAX_VALUE / 10 && t > Integer.MAX_VALUE % 10))) {
+            if (isPos && result > (Integer.MAX_VALUE - t) / 10) {
                 return Integer.MAX_VALUE;
             }
 
-            if (isNegative && (result < Integer.MIN_VALUE / 10 || (result == Integer.MIN_VALUE / 10 && t < Integer.MIN_VALUE % 10))) {
+            if (!isPos && result < (Integer.MIN_VALUE - t) / 10) {
                 return Integer.MIN_VALUE;
             }
 
             result = result * 10 + t;
+            index++;
         }
 
         return result;
